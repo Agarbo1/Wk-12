@@ -19,19 +19,21 @@ function printBreadthFirst(start) {
   const visited = new Set();
 
   while (queue.length > 0) {
-    const node = queue.shift();
+    let node = queue.shift();
     if (!visited.has(node)) {
+      console.log(node)
       visited.add(node)
-      const neighbors = adjList[node];
-      queue.push(...neighbors)
     };
+    let neighbors = adjList[node];
+    neighbors.forEach((neighbor) => {
+      if (!visited.has(neighbor)) queue.push(neighbor)
+    })
   };
-  console.log(visited);
 };
-console.log("First Test:")
-debugger
-printBreadthFirst(3); // Prints 1 through 6 in Breadth-first order, starting with 3
-                      // One possible solution:  3, 2, 4, 1, 5, 6
+// console.log("First Test:")
+// debugger
+// printBreadthFirst(3); // Prints 1 through 6 in Breadth-first order, starting with 3
+//                       // One possible solution:  3, 2, 4, 1, 5, 6
 // console.log("Second Test:")
 // printBreadthFirst(6); // Prints 1 through 6 in Breadth-first order, starting with 6
 //                       // One possible solution:  6, 4, 3, 5, 2, 1
