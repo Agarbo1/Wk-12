@@ -13,17 +13,31 @@ const adjList = {
   3: [2, 4],
   4: [3, 5, 6],
   5: [1, 2, 4],
-  6: [4]
-}
+  6: [4],
+};
 
 function breadthFirstTraversal(start) {
-  // Your code here 
+  // create a queue of nodes to visit, and a set of visited nodes
+  const queue = [start];
+
+  const visited = new Set();
+
+  while (queue.length > 0) {
+    let node = queue.shift();
+    if (!visited.has(node)) {
+      visited.add(node);
+    }
+    let neighbors = adjList[node];
+    neighbors.forEach((neighbor) => {
+      if (!visited.has(neighbor)) queue.push(neighbor);
+    });
+  }
+  return Array.from(visited)
 }
 
 // console.log(breadthFirstTraversal(3)); // [3, 2, 4, 1, 5, 6]
 // console.log(breadthFirstTraversal(6)); // [6, 4, 3, 5, 2, 1]
 // console.log(breadthFirstTraversal(4)); // [4, 3, 5, 6, 2, 1]
-
 
 /******************** DO NOT MODIFY ANY CODE BELOW THIS LINE *****************/
 module.exports = breadthFirstTraversal;
