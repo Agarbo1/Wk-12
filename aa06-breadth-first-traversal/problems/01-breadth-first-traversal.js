@@ -13,12 +13,25 @@ const adjList = {
 }
 
 function printBreadthFirst(start) {
-  // Your code here 
-}
+  // create a queue of nodes to visit, and a set of visited nodes
+  const queue = [start];
 
-// console.log("First Test:")
-// printBreadthFirst(3); // Prints 1 through 6 in Breadth-first order, starting with 3
-//                       // One possible solution:  3, 2, 4, 1, 5, 6
+  const visited = new Set();
+
+  while (queue.length > 0) {
+    const node = queue.shift();
+    if (!visited.has(node)) {
+      visited.add(node)
+      const neighbors = adjList[node];
+      queue.push(...neighbors)
+    };
+  };
+  console.log(visited);
+};
+console.log("First Test:")
+debugger
+printBreadthFirst(3); // Prints 1 through 6 in Breadth-first order, starting with 3
+                      // One possible solution:  3, 2, 4, 1, 5, 6
 // console.log("Second Test:")
 // printBreadthFirst(6); // Prints 1 through 6 in Breadth-first order, starting with 6
 //                       // One possible solution:  6, 4, 3, 5, 2, 1
